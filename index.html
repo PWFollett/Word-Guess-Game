@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HangMan Game</title>
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
+
+<body>
+    <!--Bootstrap container -->
+    <div class="container">
+        <!-- Jumbotron title -->
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1>Guess the Dog! Hang Man Game</h1>
+                <strong>Guess a dog breed to win the game, be sure not to include spaces!</strong>
+                <small>Press any letter key to begin</small>
+            </div>
+        </div>
+        <!--Games sections for counting numbers are located below-->
+        <div class="row">
+            <div class="col-lg-12">
+                <!--Panel number one will hold the blanks to guess in the word game-->
+                <div class="panel panel-default">
+                    <div class="panel heading">
+                        <h2 class="panel-name">Guess this word!</h2>
+
+                        <div class="panel-body">
+                            <h2 id="word-fill">_ _ _ _ _ _ _ _ _ _ _ _ _</h2>
+                        </div>
+                    </div>
+                    <!--SECOND PANEL-->
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            WRONG GUESSES: <span id="guesses-wrong"></span>
+                        </div>
+                    </div>
+                    <!--THIRD PANEL-->
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            GUESSES REMAINING: <span id="guesses-remaining"></span>
+                        </div>
+                    </div>
+                    <!--FOURTH PANEL-->
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            WINNER WINNER: <span id="counter-wins"></span>
+                        </div>
+                    </div>
+                    <!--FIFTH PANEL-->
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            LOSSES: <span id="counter-losses"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<!--JavaScript Link-->
+<script src="assets/javascript/game.js"></script>
+</body>
+</html>
