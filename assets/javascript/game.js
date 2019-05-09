@@ -1,15 +1,17 @@
 // GLOBAL VARIABLES 
 // Array of Dogs
-var wordsList = ["husky", "shepard", "cockapoo", "goldenlab", "beagle", "bulldog",
-    "yorkie", "weinerdog", "mastiff", "saintbernard", "greyhound", "poodle"];
+var wordsList = ["husky", "shepard", "pug", "golden", "boxer", "pointer",
+    "yorkie", "hound", "basenji", "pinscher", "greyhound", "corgi"];
 
 // Solution 
-var wordAnswer = "_"
+// 
+
+var wordAnswer = " _ ";
 
 // Breaks the solution into individual letters to be stored in array
 var lettersInWord = [];
 
-// Number of blanks based on solution?
+// Number of blanks based on solution
 var numBlanks = 0;
 
 // solved and blank letters
@@ -21,33 +23,42 @@ var incorrectGuesses = [];
 // Counters
 var winCounter = 0;
 var lossCounter = 0;
-var MaxnumGuesses = 9;
-var numGuesses = 0;
+var numGuesses;
 //Others
 var keyPressed = false;
-var isDone = false;
-var Word = "_";
+var Word = " _ ";
 var gamestarted = false;
 
 
 //FUNCTION
 
 document.onkeydown = function (event) { 
-  //  console.log("this is our key", event.keyCode);
+    console.log("this is our key", event.keyCode);
     if (event.keyCode === 13 && gamestarted === false) {
         gamestarted = true; 
-        startGame()   
+        startGame();
     } else {
-      // console.log("play with this letter", event.key) 
+    console.log("play with this letter", event.key) 
        playGame(event.key)
     }
-      };
-function startGame() {
-    Word = wordsList[Math.floor(Math.random() * wordsList.length)];
-    console.log(Word);
-    var wordReplacement = Word.replace(/./g, "-");
+};
 
+function updateWordDisplay() {
+    var wordReplacement = blanksAndcorrects.join(' ');
     document.getElementById("word-fill").innerHTML = wordReplacement;
+}
+     
+function startGame() {
+    blanksAndcorrects = [];
+    numGuesses = 9;
+    Word = wordsList[Math.floor(Math.random() * wordsList.length)];
+    lettersInWord = Word.split("");
+    numBlanks = lettersInWord.length;
+    // Fills up the Blanks with the right amount of blanks, based on the amount of letters in the solution
+    for (var i = 0; i < numBlanks; i++) {
+      blanksAndcorrects.push("_");
+    }
+    updateWordDisplay();
 }
 // PLAY GAME FUNCTION
 function playGame(userGuess) {
@@ -55,46 +66,40 @@ function playGame(userGuess) {
     console.log("current game word", Word);
     console.log("Is letter in Word?", Word.indexOf(userGuess))
     if (Word.indexOf(userGuess) >= 0){
-        alert(userGuess+" in this word " + Word)
+       // alert(userGuess+" in this word " + Word);
     }
-
+    checkGuess(userGuess);
 }
 
-// Variable Reset
-numGuesses = MaxnumGuesses
-incorrectGuesses = [];
-
-// for loop to add word?
-for (let i = 0; i < Word.length; i++) {
-    blanksAndcorrect[i] = "_";
-}
-
-// LOSER FUNCTION
-function isLoser() {
-    if (numGuesses <= 0) {
-        lossCounter++;
-        isDone = true;
-    }
-};
 function checkGuess(letter) {
-    //if letter is guessed
-    if (blanksAndcorrects.indexOf(letter) === -1) {
-        blanksAndcorrects.push(letter);
-        // if letter isnt present in answer
-        if (Word.indexOf(letter) === -1) {
-            numGuesses--;
-            if (numGuesses <= 3) {
-                document.getElementById("Guesses");
-            }
-            else {
-                for (var i = 0; i < Word.length; i++) {
-                    if (letter === Word[i]) {
-                        wordAnswer[i] = letter;
-                    }
-                }
-            }
+    console.log(letter);
+    var letterIndex = Word.indexOf(letter);
+    
+    if (letterIndex === -1) {
+        numGuesses--;
+        document.getElementById("guesses-remaining").innerHTML = numGuesses
+        if (numGuesses <= 0) {
+            alert("YOU LOSE!");
+            gamestarted = false;
+            document.getElementById("counter-losses").innerHTML = lossCounter; 
+            lossCounter++;
+
         }
+      
+    } else {
+        console.log(blanksAndcorrects, '!' + blanksAndcorrects[letterIndex] + '!');
+        blanksAndcorrects[letterIndex] = letter;
+        console.log(blanksAndcorrects);
+        updateWordDisplay();
+        blanksAndcorrects.indexOf("_")
+        var blanksIndex = blanksAndcorrects.indexOf("_");
+        if (blanksIndex === -1) {
+            alert("YOU WIN!");
+            gamestarted = false;
+            document.getElementById("counter-wins").innerHTML = winCounter; 
+            winCounter++;
+
+            }
+        
     }
-
-
 };
