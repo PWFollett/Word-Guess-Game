@@ -39,21 +39,11 @@ document.onkeydown = function (event) {
         playGame(event.key)
     }
 };
-var alphabet = ["a", "b", "c", "d", "e", "f", "g", 
-                "h", "i", "j", "k", "l", "m", "n", 
-                "o", "p", "q", "r", "s", "t", "u", 
-                "v", "w", "x", "y", "z"];
-
-function firstCheck(letter){
-    if (alphabet.indexOf(letter.key)> -1 ){
-        correctCheck(letter)
-    }
-}
 function updateWordDisplay() {
     var wordReplacement = blanksAndcorrects.join(' ');
     document.getElementById("word-fill").innerHTML = wordReplacement;
-
- startGame() {
+}
+function startGame() {
     blanksAndcorrects = [];
     numGuesses = 9;
     Word = wordsList[Math.floor(Math.random() * wordsList.length)];
@@ -120,4 +110,16 @@ function checkGuess(letter) {
 
     }
 };
+
+// Maybe the fix to losing guesses when striking non-letter keys
+var alphabet = ["a", "b", "c", "d", "e", "f", "g", 
+                "h", "i", "j", "k", "l", "m", "n", 
+                "o", "p", "q", "r", "s", "t", "u", 
+                "v", "w", "x", "y", "z"];
+
+function firstCheck(letter){
+    if (alphabet.indexOf(letter.key)> -1 ){
+        correctCheck(letter)
+    }
+}
 
