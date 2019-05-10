@@ -4,10 +4,7 @@ var wordsList = ["husky", "shepard", "pug", "golden", "boxer", "pointer",
     "yorkie", "hound", "basenji", "pinscher", "greyhound", "corgi"];
 
 // Solution 
-// 
-
-var wordAnswer = " _ ";
-
+var Word = " _ ";
 // Breaks the solution into individual letters to be stored in array
 var lettersInWord = [];
 
@@ -26,7 +23,7 @@ var lossCounter = 0;
 var numGuesses;
 //Others
 var keyPressed = false;
-var Word = " _ ";
+
 var gamestarted = false;
 
 
@@ -98,8 +95,11 @@ function checkGuess(letter) {
             gamestarted = false;
             document.getElementById("counter-wins").innerHTML = winCounter; 
             winCounter++;
+        }
+        else {
+            document.getElementById("guesses-wrong").innerHTML= incorrectGuesses
+            incorrectGuesses.push(letter)
 
-            }
-        
+        }
     }
 };
