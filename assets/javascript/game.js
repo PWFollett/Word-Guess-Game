@@ -16,7 +16,11 @@ var blanksAndcorrects = [];
 
 // Incorrect Guesses =
 var incorrectGuesses = [];
-
+// Alphabet String to hopefully only lose guess when these keys are struck
+var alphabet = ["a", "b", "c", "d", "e", "f", "g", 
+                "h", "i", "j", "k", "l", "m", "n", 
+                "o", "p", "q", "r", "s", "t", "u", 
+                "v", "w", "x", "y", "z"];
 // Counters
 var winCounter = 0;
 var lossCounter = 0;
@@ -39,6 +43,11 @@ document.onkeydown = function (event) {
         playGame(event.key)
     }
 };
+function firstCheck(letter){
+    if (alphabet.indexOf(letter.key)> -1 ){
+        checkGuess(letter)
+    }
+}
 function updateWordDisplay() {
     var wordReplacement = blanksAndcorrects.join(' ');
     document.getElementById("word-fill").innerHTML = wordReplacement;
@@ -63,7 +72,10 @@ function playGame(userGuess) {
     if (Word.indexOf(userGuess) >= 0) {
         // alert(userGuess+" in this word " + Word);
     }
+    
+    firstCheck(userGuess);
     checkGuess(userGuess);
+
 }
 function checkGuess(letter) {
     console.log(letter);
@@ -72,7 +84,7 @@ function checkGuess(letter) {
     if (letterIndex === -1) {
         numGuesses--;
         document.getElementById("guesses-remaining").innerHTML = numGuesses
-        if (numGuesses <= 1) {
+        if (numGuesses < 1) {
             alert("YOU LOSE!");
             gamestarted = false;
             document.getElementById("counter-losses").innerHTML = lossCounter;
@@ -94,32 +106,11 @@ function checkGuess(letter) {
             winCounter++;
         }
         else {
-            var userKeyPressEvent
-            userKeyPressEvent.push(letter)
+            incorrectGuesses.push(letter)
             document.getElementById("guesses-wrong").innerHTML = incorrectGuesses;
-
-            if (Word.includes(String.fromCharCode(event.charCode))) {
-                lettersInWord.push(String.fromCharCode(event.charCode));
-                incorrectGuesses.innerHTML = "guesses-wrong";
-            }
-
-
-
         }
-
-
     }
 };
 
-// Maybe the fix to losing guesses when striking non-letter keys
-var alphabet = ["a", "b", "c", "d", "e", "f", "g", 
-                "h", "i", "j", "k", "l", "m", "n", 
-                "o", "p", "q", "r", "s", "t", "u", 
-                "v", "w", "x", "y", "z"];
 
-function firstCheck(letter){
-    if (alphabet.indexOf(letter.key)> -1 ){
-        correctCheck(letter)
-    }
-}
 
