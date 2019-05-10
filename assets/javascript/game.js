@@ -97,13 +97,19 @@ function checkGuess(letter) {
             winCounter++;
         }
         else {
-            document.onkeyup = function(event) {
-            var userKeyPressEvent = event.key
-            (userKeyPressEvent === 'a' | userKeyPressEvent === 'b' | userKeyPressEvent === 'c' | userKeyPressEvent === 'd' | userKeyPressEvent === 'e' | userKeyPressEvent === 'f' | userKeyPressEvent === 'g' | userKeyPressEvent === 'h' | userKeyPressEvent === 'i' | userKeyPressEvent === 'j' | userKeyPressEvent === 'k' | userKeyPressEvent === 'l' | userKeyPressEvent === 'm' | userKeyPressEvent === 'n' | userKeyPressEvent === 'o' | userKeyPressEvent === 'p' | userKeyPressEvent === 'q' | userKeyPressEvent === 'r' | userKeyPressEvent === 's' | userKeyPressEvent === 't' | userKeyPressEvent === 'u' | userKeyPressEvent === 'v' | userKeyPressEvent === 'w' | userKeyPressEvent === 'x' | userKeyPressEvent === 'y' | userKeyPressEvent === 'z')
-            }
+            var userKeyPressEvent 
+           userKeyPressEvent.push(letter)
+          document.getElementById("guesses-wrong").innerHTML= incorrectGuesses;
             
-            userKeyPressEvent.push(letter)
-            document.getElementById("guesses-wrong").innerHTML= incorrectGuesses.join(" ");
+            if (Word.includes(String.fromCharCode (event.charCode))) {
+                lettersInWord.push(String.fromCharCode (event.charCode));
+                incorrectGuesses.innerHTML = "guesses-wrong";}
+
+        
+        
         }
+
+
     }
 };
+
