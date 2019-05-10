@@ -75,7 +75,7 @@ function checkGuess(letter) {
     if (letterIndex === -1) {
         numGuesses--;
         document.getElementById("guesses-remaining").innerHTML = numGuesses
-        if (numGuesses <= 0) {
+        if (numGuesses <= 1) {
             alert("YOU LOSE!");
             gamestarted = false;
             document.getElementById("counter-losses").innerHTML = lossCounter; 
@@ -97,9 +97,13 @@ function checkGuess(letter) {
             winCounter++;
         }
         else {
-            document.getElementById("guesses-wrong").innerHTML= incorrectGuesses
-            incorrectGuesses.push(letter)
-
+            document.onkeyup = function(event) {
+            var userKeyPressEvent = event.key
+            (userKeyPressEvent === 'a' | userKeyPressEvent === 'b' | userKeyPressEvent === 'c' | userKeyPressEvent === 'd' | userKeyPressEvent === 'e' | userKeyPressEvent === 'f' | userKeyPressEvent === 'g' | userKeyPressEvent === 'h' | userKeyPressEvent === 'i' | userKeyPressEvent === 'j' | userKeyPressEvent === 'k' | userKeyPressEvent === 'l' | userKeyPressEvent === 'm' | userKeyPressEvent === 'n' | userKeyPressEvent === 'o' | userKeyPressEvent === 'p' | userKeyPressEvent === 'q' | userKeyPressEvent === 'r' | userKeyPressEvent === 's' | userKeyPressEvent === 't' | userKeyPressEvent === 'u' | userKeyPressEvent === 'v' | userKeyPressEvent === 'w' | userKeyPressEvent === 'x' | userKeyPressEvent === 'y' | userKeyPressEvent === 'z')
+            }
+            
+            userKeyPressEvent.push(letter)
+            document.getElementById("guesses-wrong").innerHTML= incorrectGuesses.join(" ");
         }
     }
 };
