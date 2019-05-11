@@ -16,45 +16,39 @@ var blanksAndcorrects = [];
 
 // Incorrect Guesses =
 var incorrectGuesses = [];
-// Alphabet String to hopefully only lose guess when these keys are struck
-var alphabet = ["a", "b", "c", "d", "e", "f", "g", 
-                "h", "i", "j", "k", "l", "m", "n", 
-                "o", "p", "q", "r", "s", "t", "u", 
-                "v", "w", "x", "y", "z"];
+
 // Counters
 var winCounter = 0;
 var lossCounter = 0;
 var numGuesses;
 //Others
 var keyPressed = false;
-
 var gamestarted = false;
+var lettersPressed = document.getElementById("guesses-wrong");
+
 
 
 //FUNCTION
 
-document.onkeydown = function (event) {
+document.onkeyup = function (event) {
     console.log("this is our key", event.keyCode);
     if (event.keyCode === 13 && gamestarted === false) {
         gamestarted = true;
         startGame();
+        var eventKeys = event.key; 
+        lettersPressed.textContent += eventKeys;
     } else {
-        console.log("play with this letter", event.key)
-        playGame(event.key)
+       playGame(event.key)
     }
 };
-function firstCheck(letter){
-    if (alphabet.indexOf(letter.key)> -1 ){
-        checkGuess(letter)
-    }
-}
+
 function updateWordDisplay() {
     var wordReplacement = blanksAndcorrects.join(' ');
-    document.getElementById("word-fill").innerHTML = wordReplacement;
+    document.getElementById("word-fill").textContent = wordReplacement;
 }
 function startGame() {
     blanksAndcorrects = [];
-    numGuesses = 9;
+    numGuesses = 10;
     Word = wordsList[Math.floor(Math.random() * wordsList.length)];
     lettersInWord = Word.split("");
     numBlanks = lettersInWord.length;
@@ -73,7 +67,6 @@ function playGame(userGuess) {
         // alert(userGuess+" in this word " + Word);
     }
     
-    firstCheck(userGuess);
     checkGuess(userGuess);
 
 }
@@ -83,11 +76,11 @@ function checkGuess(letter) {
 
     if (letterIndex === -1) {
         numGuesses--;
-        document.getElementById("guesses-remaining").innerHTML = numGuesses
+        document.getElementById("guesses-remaining").textContent = numGuesses
         if (numGuesses < 1) {
             alert("YOU LOSE!");
             gamestarted = false;
-            document.getElementById("counter-losses").innerHTML = lossCounter;
+            document.getElementById("counter-losses").textContent = lossCounter;
             lossCounter++;
 
         }
@@ -102,15 +95,14 @@ function checkGuess(letter) {
         if (blanksIndex === -1) {
             alert("YOU WIN!");
             gamestarted = false;
-            document.getElementById("counter-wins").innerHTML = winCounter;
+            document.getElementById("counter-wins").textContent = winCounter;
             winCounter++;
         }
-        else {
-            incorrectGuesses.push(letter)
-            document.getElementById("guesses-wrong").innerHTML = incorrectGuesses;
-        }
+        for (var i = 0; i < incorrectGuesses.length; i++) {
+            if (userGuess === incorrectGuesses[i]){ 
+            incorrectGuesses()}}
+            
     }
-};
 
-
-
+        document.getElementById("guesses-wrong").textContent = incorrectGuesses;     
+    };
