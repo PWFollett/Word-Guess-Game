@@ -24,11 +24,12 @@ var numGuesses;
 //Others
 var keyPressed = false;
 var gamestarted = false;
-var lettersPressed = document.getElementById("guesses-wrong");
+
 
 
 
 //FUNCTION
+
 
 document.onkeyup = function (event) {
     console.log("this is our key", event.keyCode);
@@ -36,7 +37,8 @@ document.onkeyup = function (event) {
         gamestarted = true;
         startGame();
         var eventKeys = event.key; 
-        lettersPressed.textContent += eventKeys;
+        document.getElementById("guesses-wrong").innerHTML= incorrectGuesses
+        incorrectGuesses.push(eventKeys);  
     } else {
        playGame(event.key)
     }
@@ -104,5 +106,5 @@ function checkGuess(letter) {
             
     }
 
-        document.getElementById("guesses-wrong").textContent = incorrectGuesses;     
+        document.getElementById("guesses-wrong").innerHTML = incorrectGuesses;     
     };
