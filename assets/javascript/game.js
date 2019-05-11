@@ -36,9 +36,6 @@ document.onkeyup = function (event) {
     if (event.keyCode === 13 && gamestarted === false) {
         gamestarted = true;
         startGame();
-        var eventKeys = event.key; 
-        document.getElementById("guesses-wrong").innerHTML= incorrectGuesses
-        incorrectGuesses.push(eventKeys);  
     } else {
        playGame(event.key)
     }
@@ -50,6 +47,7 @@ function updateWordDisplay() {
 }
 function startGame() {
     blanksAndcorrects = [];
+    incorrectGuesses = [];
     numGuesses = 10;
     Word = wordsList[Math.floor(Math.random() * wordsList.length)];
     lettersInWord = Word.split("");
@@ -77,6 +75,10 @@ function checkGuess(letter) {
     var letterIndex = Word.indexOf(letter);
 
     if (letterIndex === -1) {
+        console.log('incorrect guess letter', letter)
+        incorrectGuesses.push(letter)
+        console.log('incorrect guess array', incorrectGuesses)
+        document.getElementById("guesses-wrong").textContent = incorrectGuesses;
         numGuesses--;
         document.getElementById("guesses-remaining").textContent = numGuesses
         if (numGuesses < 1) {
@@ -106,5 +108,5 @@ function checkGuess(letter) {
             
     }
 
-        document.getElementById("guesses-wrong").innerHTML = incorrectGuesses;     
+        document.getElementById("guesses-wrong").textContent = incorrectGuesses;     
     };
